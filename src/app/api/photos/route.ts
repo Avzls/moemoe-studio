@@ -1,0 +1,30 @@
+import { NextResponse } from "next/server";
+import { fetchGooglePhotos, getDemoPhotos } from "@/lib/googlePhotos";
+
+export const dynamic = "force-dynamic";
+export const revalidate = 3600; // Revalidate every hour
+
+export async function GET() {
+  try {
+    // Check if Google Photos API is configured
+    const hasGoogleConfig =
+      process.env.GOOGLE_CLIENT_ID &&
+      process.env.GOOGLE_CLIENT_SECRET &&
+      process.env.GOOGLE_REFRESH_TOKEN &&
+      process.env.GOOGLE_PHOTOS_ALBUM_ID;
+
+    if (hasGoogleConfig) {
+      const photos = await fetchGooglePhotos();
+      return NextResponse.json({ photos, source: "google-photos" });
+    } else {
+      // Return demo photos if not configured
+      const photos = getDemoPhotos();
+      return NextResponse.json({ photos, source: "demo" });
+    }
+  } catch (error) {
+    console.error("Error fetching photos:", error);
+    // Fallback to demo photos on error
+    const photos = getDemoPhotos();
+    return NextResponse.json({ photos, source: "demo-fallback" });
+  }
+}
