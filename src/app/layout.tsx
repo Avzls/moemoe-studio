@@ -13,20 +13,20 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Moemoe Studio | Foto Alam Berkualitas Tinggi",
+  title: "Moemoe Cipluk | Foto Alam Berkualitas Tinggi",
   description: "Koleksi foto alam berkualitas HD untuk mempercantik ruangan, proyek kreatif, dan kebutuhan visual Anda. Gunung, pantai, hutan, dan sunset.",
-  keywords: ["foto alam", "nature photography", "foto gunung", "foto pantai", "foto hutan", "foto sunset", "wallpaper alam", "Moemoe Studio"],
-  authors: [{ name: "Moemoe Studio" }],
+  keywords: ["foto alam", "nature photography", "foto gunung", "foto pantai", "foto hutan", "foto sunset", "wallpaper alam", "Moemoe Cipluk"],
+  authors: [{ name: "Moemoe Cipluk" }],
   openGraph: {
-    title: "Moemoe Studio | Foto Alam Berkualitas Tinggi",
+    title: "Moemoe Cipluk | Foto Alam Berkualitas Tinggi",
     description: "Koleksi foto alam berkualitas HD untuk mempercantik ruangan, proyek kreatif, dan kebutuhan visual Anda.",
     type: "website",
     locale: "id_ID",
-    siteName: "Moemoe Studio",
+    siteName: "Moemoe Cipluk",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Moemoe Studio | Foto Alam Berkualitas Tinggi",
+    title: "Moemoe Cipluk | Foto Alam Berkualitas Tinggi",
     description: "Koleksi foto alam berkualitas HD untuk mempercantik ruangan, proyek kreatif, dan kebutuhan visual Anda.",
   },
   robots: {

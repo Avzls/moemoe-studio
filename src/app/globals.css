@@ -14,6 +14,7 @@
   --color-foreground: var(--foreground);
   --color-accent: var(--accent);
   --color-accent-light: var(--accent-light);
+  --color-card: var(--card-bg);
   --color-card-bg: var(--card-bg);
   --color-border: var(--border);
   --font-sans: var(--font-geist-sans);

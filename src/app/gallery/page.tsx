@@ -16,7 +16,7 @@ interface Photo {
   height: number;
 }
 
-const CATEGORIES = ["Semua", "Gunung", "Pantai", "Hutan", "Sunset"];
+
 
 // Grid pattern that repeats - matching the reference design
 // Each number represents: 1=small, 2=medium, 3=large/tall, 4=wide
@@ -42,8 +42,19 @@ export default function GalleryPage() {
   const [loading, setLoading] = useState(true);
   const [activeCategory, setActiveCategory] = useState("Semua");
   const [selectedPhoto, setSelectedPhoto] = useState<Photo | null>(null);
+  const [categories, setCategories] = useState<string[]>(["Semua"]);
 
   useEffect(() => {
+    // Fetch categories
+    fetch("/api/categories")
+      .then((r) => r.json())
+      .then((data) => {
+        if (Array.isArray(data)) {
+          setCategories(["Semua", ...data.map((c: { name: string }) => c.name)]);
+        }
+      })
+      .catch(console.error);
+
     const fetchPhotos = async () => {
       try {
         const response = await fetch("/api/photos");
@@ -105,7 +116,7 @@ export default function GalleryPage() {
             transition={{ delay: 0.1 }}
           >
             <span className="bg-gradient-to-r from-white via-purple-200 to-accent bg-clip-text text-transparent">
-              Galeri Foto Alam
+              Gallery Moemoe Cipluk
             </span>
           </motion.h1>
           
@@ -119,7 +130,7 @@ export default function GalleryPage() {
           </motion.p>
           
           <CategoryFilter
-            categories={CATEGORIES}
+            categories={categories}
             activeCategory={activeCategory}
             onCategoryChange={setActiveCategory}
           />

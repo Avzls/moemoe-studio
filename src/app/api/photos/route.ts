@@ -1,12 +1,32 @@
 import { NextResponse } from "next/server";
 import { fetchGooglePhotos, getDemoPhotos } from "@/lib/googlePhotos";
+import { supabaseAdmin } from "@/lib/supabase";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 3600; // Revalidate every hour
 
 export async function GET() {
   try {
-    // Check if Google Photos API is configured
+    // Try Supabase first (if configured)
+    if (supabaseAdmin) {
+      const { data: supabasePhotos } = await supabaseAdmin
+        .from("photos")
+        .select("*")
+        .order("sort_order", { ascending: true })
+        .order("created_at", { ascending: false });
+
+      const photos = (supabasePhotos || []).map((p) => ({
+        id: p.id,
+        src: p.image_url,
+        alt: p.title,
+        category: p.category,
+        width: p.width || 1600,
+        height: p.height || 1200,
+      }));
+      return NextResponse.json({ photos, source: "supabase" });
+    }
+
+    // Fallback: Check if Google Photos API is configured
     const hasGoogleConfig =
       process.env.GOOGLE_CLIENT_ID &&
       process.env.GOOGLE_CLIENT_SECRET &&

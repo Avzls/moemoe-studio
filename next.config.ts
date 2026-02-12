@@ -18,6 +18,11 @@ const nextConfig: NextConfig = {
         hostname: "*.googleusercontent.com",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "*.supabase.co",
+        pathname: "/storage/**",
+      },
     ],
     // Optimize images for faster loading
     formats: ["image/avif", "image/webp"],
